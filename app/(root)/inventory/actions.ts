@@ -1,3 +1,4 @@
+import { Product } from "@/app/types";
 import { createClient } from "@/utils/supabase/client";
 
 export async function getProducts() {
@@ -6,7 +7,7 @@ export async function getProducts() {
   return products;
 }
 
-export async function addProduct(product: any) {
+export async function addProduct(product: Product) {
   const supabase = createClient();
   const { data: products, error } = await supabase
     .from("products")

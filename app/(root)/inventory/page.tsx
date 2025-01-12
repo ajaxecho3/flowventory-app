@@ -1,7 +1,5 @@
 import { DataTable } from "@/components/dataTable";
 import Header from "@/components/header";
-import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
 import React from "react";
 import { columns } from "./components/table-column";
 import { getProducts } from "./actions";

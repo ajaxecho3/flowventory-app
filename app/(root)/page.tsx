@@ -1,13 +1,7 @@
 import Header from "@/components/header";
 import React from "react";
-import { createClient } from "@/utils/supabase/server";
 
 async function RootPage() {
-  const supabase = await createClient();
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
   return (
     <div>
       <Header linkTrails={[]} />
