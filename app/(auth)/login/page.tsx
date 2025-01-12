@@ -11,7 +11,7 @@ import { cn } from "@/lib/utils";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 
-import { login, signup } from "./action";
+import { login } from "./action";
 
 export default function LoginPage() {
   return (
@@ -58,19 +58,6 @@ export default function LoginPage() {
                   <Button className="w-full" formAction={login}>
                     Login
                   </Button>
-                  <Button
-                    variant="outline"
-                    className="w-full"
-                    formAction={signup}
-                  >
-                    Sign up
-                  </Button>
-                </div>
-                <div className="mt-4 text-center text-sm">
-                  Don&apos;t have an account?{" "}
-                  <a href="#" className="underline underline-offset-4">
-                    Sign up
-                  </a>
                 </div>
               </form>
             </CardContent>
