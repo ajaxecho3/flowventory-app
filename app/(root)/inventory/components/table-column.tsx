@@ -1,9 +1,9 @@
 "use client";
 
-import { Product } from "@/app/types";
 import { ColumnDef } from "@tanstack/react-table";
+import type { Database } from "@/lib/database.types";
 
-export const columns: ColumnDef<Product>[] = [
+export const columns: ColumnDef<Database>[] = [
   {
     accessorKey: "name",
     header: "Name",
