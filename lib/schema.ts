@@ -101,15 +101,7 @@ export const publicInventoryAdjustmentsUpdateSchemaSchema = z.object({
   reason: z.string().optional(),
 });
 
-export const publicInventoryAdjustmentsRelationshipsSchemaSchema = z.tuple([
-  z.object({
-    foreignKeyName: z.literal("inventory_adjustments_product_id_fkey"),
-    columns: z.tuple([z.literal("product_id")]),
-    isOneToOne: z.literal(false),
-    referencedRelation: z.literal("products"),
-    referencedColumns: z.tuple([z.literal("id")]),
-  }),
-]);
+export const publicInventoryAdjustmentsRelationshipsSchemaSchema = z.tuple([]);
 
 export const publicProductsRowSchemaSchema = z.object({
   category_id: z.string().nullable(),
@@ -118,6 +110,7 @@ export const publicProductsRowSchemaSchema = z.object({
   description: z.string().nullable(),
   id: z.string(),
   image: z.string().nullable(),
+  image_filename: z.string().nullable(),
   name: z.string(),
   price: z.number(),
   quantity: z.number(),
@@ -133,6 +126,7 @@ export const publicProductsInsertSchemaSchema = z.object({
   description: z.string().optional().nullable(),
   id: z.string().optional(),
   image: z.string().optional().nullable(),
+  image_filename: z.string().optional().nullable(),
   name: z.string(),
   price: z.number(),
   quantity: z.number().optional(),
@@ -148,6 +142,7 @@ export const publicProductsUpdateSchemaSchema = z.object({
   description: z.string().optional().nullable(),
   id: z.string().optional(),
   image: z.string().optional().nullable(),
+  image_filename: z.string().optional().nullable(),
   name: z.string().optional(),
   price: z.number().optional(),
   quantity: z.number().optional(),
@@ -229,12 +224,4 @@ export const publicTransactionsUpdateSchemaSchema = z.object({
   transact_by: z.string().optional(),
 });
 
-export const publicTransactionsRelationshipsSchemaSchema = z.tuple([
-  z.object({
-    foreignKeyName: z.literal("transactions_product_id_fkey"),
-    columns: z.tuple([z.literal("product_id")]),
-    isOneToOne: z.literal(false),
-    referencedRelation: z.literal("products"),
-    referencedColumns: z.tuple([z.literal("id")]),
-  }),
-]);
+export const publicTransactionsRelationshipsSchemaSchema = z.tuple([]);

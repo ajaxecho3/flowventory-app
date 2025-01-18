@@ -85,15 +85,7 @@ export type Database = {
           product_id?: string;
           reason?: string;
         };
-        Relationships: [
-          {
-            foreignKeyName: "inventory_adjustments_product_id_fkey";
-            columns: ["product_id"];
-            isOneToOne: false;
-            referencedRelation: "products";
-            referencedColumns: ["id"];
-          },
-        ];
+        Relationships: [];
       };
       products: {
         Row: {
@@ -103,6 +95,7 @@ export type Database = {
           description: string | null;
           id: string;
           image: string | null;
+          image_filename: string | null;
           name: string;
           price: number;
           quantity: number;
@@ -117,6 +110,7 @@ export type Database = {
           description?: string | null;
           id?: string;
           image?: string | null;
+          image_filename?: string | null;
           name: string;
           price: number;
           quantity?: number;
@@ -131,6 +125,7 @@ export type Database = {
           description?: string | null;
           id?: string;
           image?: string | null;
+          image_filename?: string | null;
           name?: string;
           price?: number;
           quantity?: number;
@@ -207,15 +202,7 @@ export type Database = {
           quantity?: number;
           transact_by?: string;
         };
-        Relationships: [
-          {
-            foreignKeyName: "transactions_product_id_fkey";
-            columns: ["product_id"];
-            isOneToOne: false;
-            referencedRelation: "products";
-            referencedColumns: ["id"];
-          },
-        ];
+        Relationships: [];
       };
     };
     Views: {
