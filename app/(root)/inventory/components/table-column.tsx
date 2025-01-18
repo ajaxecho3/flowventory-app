@@ -3,7 +3,9 @@
 import { ColumnDef } from "@tanstack/react-table";
 import type { Database } from "@/lib/database.types";
 
-export const columns: ColumnDef<Database>[] = [
+export const columns: ColumnDef<
+  Database["public"]["Tables"]["products"]["Row"]
+>[] = [
   {
     accessorKey: "name",
     header: "Name",
