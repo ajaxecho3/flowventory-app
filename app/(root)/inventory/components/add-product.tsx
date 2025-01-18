@@ -30,7 +30,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { getCategories, getSuppliers } from "../actions";
+import { getCategories } from "../actions";
 import { Textarea } from "@/components/ui/textarea";
 import Image from "next/image";
 
@@ -43,7 +43,7 @@ const ACCEPTED_IMAGE_TYPES = [
 ];
 const formSchema = z.object({
   name: z.string().min(1, { message: "Name is required" }),
-  description: z.string().nullable().optional(),
+  description: z.string().optional(),
   image: z
     .any()
     .refine((files) => files?.length == 1, "Image is required.")
@@ -62,7 +62,6 @@ const formSchema = z.object({
 });
 
 const categories = await getCategories();
-const suppliers = await getSuppliers();
 function AddProduct() {
   const [previewImage, setPreviewImage] = useState<string | null>(null);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -203,33 +202,6 @@ function AddProduct() {
                         {categories.map((category) => (
                           <SelectItem key={category.id} value={category.id}>
                             {category.name}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="supplier"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Supplier</FormLabel>
-                    <Select
-                      onValueChange={field.onChange}
-                      defaultValue={field.value}
-                    >
-                      <FormControl>
-                        <SelectTrigger>
-                          <SelectValue placeholder="Select a supplier" />
-                        </SelectTrigger>
-                      </FormControl>
-                      <SelectContent>
-                        {suppliers.map((supplier) => (
-                          <SelectItem key={supplier.id} value={supplier.id}>
-                            {supplier.name}
                           </SelectItem>
                         ))}
                       </SelectContent>
