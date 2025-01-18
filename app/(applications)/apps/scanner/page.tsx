@@ -1,11 +1,12 @@
 "use client";
 
+import QRCodeScanner from "@/components/QRCodeScanner";
 import React from "react";
 
 function Scanner() {
   return (
     <div>
-      <p>Scanner</p>
+      <QRCodeScanner />
     </div>
   );
 }
