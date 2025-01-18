@@ -77,7 +77,8 @@ function AddProduct() {
     console.log(values);
   }
   const onImageChange = useCallback(
-    (e: React.ChangeEvent<HTMLInputElement>) => {
+    (e: React.ChangeEvent<HTMLInputElement>, value: string) => {
+      console.log(value);
       const file = e.target.files?.[0];
       if (file) {
         const reader = new FileReader();
@@ -251,7 +252,7 @@ function AddProduct() {
                       multiple
                       onChange={(e) => {
                         onChange(e.target.files);
-                        onImageChange(e);
+                        onImageChange(e, value);
                       }}
                       {...field}
                     />
