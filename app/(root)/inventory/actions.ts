@@ -1,11 +1,24 @@
 import { createClient } from "@/utils/supabase/client";
 import type { Database } from "@/lib/database.types";
 import { v4 as uuidv4 } from "uuid";
+import { QueryResult, QueryData, QueryError } from "@supabase/supabase-js";
 
 export async function getProducts() {
   const supabase = createClient();
-  const { data: products } = await supabase.from("products").select("*");
-  return products;
+  const products = await supabase.from("products").select(`
+     id,
+     name,
+     quantity,
+     image,
+     image_filename,
+     categories(id,name)
+  
+`);
+  const { data, error } = products;
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data as QueryData<typeof products>;
 }
 
 // In  Database Database["public"]["Tables"]["products"]["Insert"] Override the image
