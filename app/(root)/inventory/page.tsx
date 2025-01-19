@@ -8,13 +8,14 @@ import AddProduct from "./components/add-product";
 export const revalidate = 60;
 async function InventoryPage() {
   const data = await getProducts();
+  console.log(data);
   return (
     <div>
       <Header linkTrails={[{ name: "Inventory", href: "/inventory" }]} />
       <main className="p-4">
         <DataTable
-          columns={columns}
           data={data}
+          columns={columns}
           searchKey="name"
           extraActions={<AddProduct />}
         />

@@ -7,13 +7,12 @@ import Link from "next/link";
 type Product = {
   id: string;
   name: string;
-  quantity: number;
-  image: string;
-  image_filename: string;
+  image: string | null;
+  image_filename: string | null;
   categories: {
     id: string;
     name: string;
-  };
+  } | null;
 };
 
 export const columns: ColumnDef<Product>[] = [
@@ -41,12 +40,9 @@ export const columns: ColumnDef<Product>[] = [
     accessorKey: "name",
     header: "Name",
   },
+
   {
-    accessorKey: "quantity",
-    header: "Quantity",
-  },
-  {
-    accessorKey: "categories.name",
     header: "Category",
+    accessorFn: (info) => info.categories?.name,
   },
 ];
