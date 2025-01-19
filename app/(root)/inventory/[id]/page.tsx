@@ -6,16 +6,14 @@ import Image from "next/image";
 export default async function ProductPage({
   params,
 }: {
-  params: { id: string };
-  searchParams?: { [key: string]: string | string[] | undefined };
+  params: Promise<{ id: string }>;
 }) {
-  const { id } = params;
+  const { id } = await params;
   const product = await getProductById(id as string);
 
   if (!product) {
     return <h1>Product not found</h1>;
   }
-
   return (
     <div>
       <Header
