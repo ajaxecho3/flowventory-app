@@ -2,6 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import Link from "next/link";
 
 type Product = {
   id: string;
@@ -21,13 +22,18 @@ export const columns: ColumnDef<Product>[] = [
     header: "Product Image",
     cell: ({ row }) => {
       return (
-        <Avatar className="rounded-sm">
-          <AvatarImage
-            src={row.original.image!}
-            alt={row.original.image_filename!}
-          />
-          <AvatarFallback>PV</AvatarFallback>
-        </Avatar>
+        <Link href={`/inventory/${row.original.id}`}>
+          <Avatar
+            className="rounded-sm"
+            onClick={() => console.log(row.original)}
+          >
+            <AvatarImage
+              src={row.original.image!}
+              alt={row.original.image_filename!}
+            />
+            <AvatarFallback>PV</AvatarFallback>
+          </Avatar>
+        </Link>
       );
     },
   },

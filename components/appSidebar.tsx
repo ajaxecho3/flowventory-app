@@ -1,5 +1,4 @@
 import { GalleryVerticalEnd } from "lucide-react";
-
 import {
   Sidebar,
   SidebarContent,
@@ -13,8 +12,13 @@ import {
 import { NavUser } from "./nav-user";
 import NavApplication from "./nav-application";
 import NavMain from "./nav-main";
+import { getUser } from "@/app/actions";
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export async function AppSidebar({
+  ...props
+}: React.ComponentProps<typeof Sidebar>) {
+  const userData = await getUser();
+
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
@@ -43,7 +47,7 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         <NavUser
           user={{
             name: "Bernardo Ochoa",
-            email: "bOchoa",
+            email: userData.user?.email as string,
             avatar: "https://github.com/bernardo-ochoa.png",
           }}
         />

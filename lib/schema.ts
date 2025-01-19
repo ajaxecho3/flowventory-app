@@ -112,9 +112,6 @@ export const publicProductsRowSchemaSchema = z.object({
   image: z.string().nullable(),
   image_filename: z.string().nullable(),
   name: z.string(),
-  price: z.number(),
-  quantity: z.number(),
-  reorder_level: z.number(),
   supplier_id: z.string().nullable(),
   updated_at: z.string().nullable(),
 });
@@ -128,9 +125,6 @@ export const publicProductsInsertSchemaSchema = z.object({
   image: z.string().optional().nullable(),
   image_filename: z.string().optional().nullable(),
   name: z.string(),
-  price: z.number(),
-  quantity: z.number().optional(),
-  reorder_level: z.number().optional(),
   supplier_id: z.string().optional().nullable(),
   updated_at: z.string().optional().nullable(),
 });
@@ -144,9 +138,6 @@ export const publicProductsUpdateSchemaSchema = z.object({
   image: z.string().optional().nullable(),
   image_filename: z.string().optional().nullable(),
   name: z.string().optional(),
-  price: z.number().optional(),
-  quantity: z.number().optional(),
-  reorder_level: z.number().optional(),
   supplier_id: z.string().optional().nullable(),
   updated_at: z.string().optional().nullable(),
 });

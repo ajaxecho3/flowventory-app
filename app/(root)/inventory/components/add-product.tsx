@@ -55,8 +55,6 @@ export const formSchema = z.object({
       (files) => ACCEPTED_IMAGE_TYPES.includes(files?.[0]?.type),
       ".jpg, .jpeg, .png and .webp files are accepted.",
     ),
-  price: z.number().positive({ message: "Price must be positive" }),
-  quantity: z.number().int().nonnegative().optional(),
   category: z.string().min(1, { message: "Category is required" }),
 });
 
@@ -67,12 +65,9 @@ function AddProduct() {
     resolver: zodResolver(formSchema),
     defaultValues: {
       name: "",
-      price: 0,
-      quantity: 0,
     },
   });
   async function onSubmit(values: z.infer<typeof formSchema>) {
-    console.log(values);
     await addProduct(values);
     form.reset();
   }
@@ -237,49 +232,6 @@ function AddProduct() {
                 </FormItem>
               )}
             />
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <FormField
-                control={form.control}
-                name="price"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Price</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        step="0.01"
-                        placeholder="0.00"
-                        {...field}
-                        onChange={(e) =>
-                          field.onChange(parseFloat(e.target.value))
-                        }
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-              <FormField
-                control={form.control}
-                name="quantity"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Quantity</FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        placeholder="0"
-                        {...field}
-                        onChange={(e) =>
-                          field.onChange(parseInt(e.target.value))
-                        }
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
 
             <DialogFooter>
               <Button type="submit">Add Product</Button>

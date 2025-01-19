@@ -1,14 +1,12 @@
 import { createClient } from "@/utils/supabase/client";
 import type { Database } from "@/lib/database.types";
 import { v4 as uuidv4 } from "uuid";
-import { QueryData } from "@supabase/supabase-js";
 
+const supabase = createClient();
 export async function getProducts() {
-  const supabase = createClient();
   const products = await supabase.from("products").select(`
      id,
      name,
-     quantity,
      image,
      image_filename,
      categories(id,name)
@@ -18,7 +16,29 @@ export async function getProducts() {
   if (error) {
     throw new Error(error.message);
   }
-  return data as QueryData<typeof products>;
+  return data;
+}
+
+export async function getProductById(id: string) {
+  const products = await supabase
+    .from("products")
+    .select(
+      `
+     id,
+     name,
+     image,
+     image_filename,
+     categories(id,name)
+  
+`,
+    )
+    .eq("id", id)
+    .single();
+  const { data, error } = products;
+  if (error) {
+    throw new Error(error.message);
+  }
+  return data;
 }
 
 // In  Database Database["public"]["Tables"]["products"]["Insert"] Override the image
@@ -27,14 +47,11 @@ interface AddProductProps {
   image?: File[];
   name: string;
   description?: string;
-  price: number;
-  quantity?: number;
   category?: string;
 }
 
 export async function addProduct(product: AddProductProps) {
   const { image, category, ...rest } = product;
-  const supabase = createClient();
   let fileName = "";
   let url = "";
   const {
@@ -67,7 +84,6 @@ export async function addProduct(product: AddProductProps) {
 }
 
 export async function getCategories() {
-  const supabase = createClient();
   const { data: categories } = await supabase.from("categories").select("*");
   if (!categories) {
     return [];
@@ -76,7 +92,6 @@ export async function getCategories() {
 }
 
 export async function getSuppliers() {
-  const supabase = createClient();
   const { data: suppliers } = await supabase.from("suppliers").select("*");
   if (!suppliers) {
     return [];
@@ -89,8 +104,6 @@ export async function uploadImage(file: File): Promise<{
   fileName: string;
   url: string;
 }> {
-  const supabase = createClient();
-
   const fileName = `${uuidv4()}-${file.name}`;
   const { data: image, error } = await supabase.storage
     .from("product_image")
@@ -117,7 +130,6 @@ export async function uploadImage(file: File): Promise<{
 }
 
 export async function deleteImage(fileName: string) {
-  const supabase = createClient();
   const { error } = await supabase.storage
     .from("product_image")
     .remove([fileName]);
@@ -125,3 +137,5 @@ export async function deleteImage(fileName: string) {
     console.log(error);
   }
 }
+
+// Get product with transations history
