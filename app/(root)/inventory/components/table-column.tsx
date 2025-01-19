@@ -1,12 +1,21 @@
 "use client";
 
 import { ColumnDef } from "@tanstack/react-table";
-import type { Database } from "@/lib/database.types";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 
-export const columns: ColumnDef<
-  Database["public"]["Tables"]["products"]["Row"]
->[] = [
+type Product = {
+  id: string;
+  name: string;
+  quantity: number;
+  image: string;
+  image_filename: string;
+  categories: {
+    id: string;
+    name: string;
+  };
+};
+
+export const columns: ColumnDef<Product>[] = [
   {
     accessorKey: "image",
     header: "Product Image",

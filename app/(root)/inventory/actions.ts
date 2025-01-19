@@ -1,7 +1,7 @@
 import { createClient } from "@/utils/supabase/client";
 import type { Database } from "@/lib/database.types";
 import { v4 as uuidv4 } from "uuid";
-import { QueryResult, QueryData, QueryError } from "@supabase/supabase-js";
+import { QueryData } from "@supabase/supabase-js";
 
 export async function getProducts() {
   const supabase = createClient();
