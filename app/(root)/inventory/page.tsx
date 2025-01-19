@@ -12,7 +12,7 @@ async function InventoryPage() {
   return (
     <div>
       <Header linkTrails={[{ name: "Inventory", href: "/inventory" }]} />
-      <main className="p-4">
+      <main className="container mx-auto p-4">
         <DataTable
           data={data}
           columns={columns}

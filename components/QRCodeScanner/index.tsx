@@ -4,7 +4,11 @@ import React from "react";
 import WebcamCapture from "./WebcamCapture";
 import jsQR from "jsqr";
 
-const QRCodeScanner = () => {
+type Props = {
+  onScan: (data: string) => void;
+};
+
+const QRCodeScanner = ({ onScan }: Props) => {
   const handleScan = (imageSrc: string) => {
     if (imageSrc) {
       const image = new Image();
@@ -21,6 +25,7 @@ const QRCodeScanner = () => {
           inversionAttempts: "dontInvert",
         });
         if (code) {
+          onScan(code.data);
           console.log("code: ", code);
         }
       };

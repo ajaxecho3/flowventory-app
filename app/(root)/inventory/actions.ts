@@ -27,6 +27,7 @@ export async function getProductById(id: string) {
      id,
      name,
      image,
+     description,
      image_filename,
      categories(id,name)
   
@@ -36,7 +37,7 @@ export async function getProductById(id: string) {
     .single();
   const { data, error } = products;
   if (error) {
-    throw new Error(error.message);
+    return null;
   }
   return data;
 }

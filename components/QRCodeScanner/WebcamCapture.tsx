@@ -7,8 +7,9 @@ const WebcamCapture = ({ onScan }: { onScan: (data: string) => void }) => {
   const webcamRef = React.useRef<Webcam>(null);
 
   const videoConstraints = {
-    width: 1280,
-    height: 720,
+    width: { min: 480 },
+    height: { min: 720 },
+    aspectRatio: 0.49,
     facingMode: "environment",
   };
 
@@ -29,6 +30,7 @@ const WebcamCapture = ({ onScan }: { onScan: (data: string) => void }) => {
   return (
     <div>
       <Webcam
+        className="h-full w-full m-4  rounded-lg"
         audio={false}
         ref={webcamRef}
         videoConstraints={videoConstraints}
